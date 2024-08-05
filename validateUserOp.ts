@@ -28,7 +28,7 @@ const userOpHash = getUserOperationHash({
 const packedUserOp = toPackedUserOperation(userOp);
 
 
-// send user op hash
+// send user op hash , this calls the entrypoint which inturn calls the smart account to validate the signature. In this flow , validate Signature fails and return [AA24 signature verification] failed error.
 export const sendUserOp = async (publicClient: PublicClient, walletClient: WalletClient) => {
     try {
         if (walletClient.account == undefined) {
@@ -50,7 +50,7 @@ export const sendUserOp = async (publicClient: PublicClient, walletClient: Walle
 }
 
 
-// validate the signature is correct based on the user op that is being sent.
+// validate user op is called, which calls the validateSignature internally to validate the signature. This passes. 
 export const validateUserOp = async (publicClient: PublicClient, smartAccountAddress: `0x${string}`) => {
     try {
         const res = await publicClient.readContract({

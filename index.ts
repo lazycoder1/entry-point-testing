@@ -56,6 +56,12 @@ const getOwner = async (publicClient: PublicClient) => {
 
 // deployAccountAndGetAddress(publicClient, walletClient, account);
 // await getEntryPointOfFactory(publicClient);
+
+// gets the owner of the smart account
 await getOwner(publicClient);
+
+// sends a user operation to the smart account, which should check the validity of the signature. This passes
 await validateUserOp(publicClient, saAddr);
+
+// sends a user operation to the entrypoint, which inturn calls the smart account to validate the signature. This fails
 await sendUserOp(publicClient, walletClient);
